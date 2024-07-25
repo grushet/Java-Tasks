@@ -13,6 +13,7 @@ public class Java_Day_2 {
         //                    problem99();
         //                    problem104();
         //                    problem105();
+         System.out.println(problem127(2));
     }
     
 
@@ -184,5 +185,18 @@ public class Java_Day_2 {
             }
             count++;
         }
+    }
+
+    private static boolean problem127(int num) {
+        if (num <= 1) {
+            return false;
+        }
+
+        for (int i = 2; i < num; i++) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }
