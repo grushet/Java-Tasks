@@ -13,7 +13,9 @@ public class Java_Day_2 {
         //                    problem99();
         //                    problem104();
         //                    problem105();
-         System.out.println(problem127(2));
+        // System.out.println(problem127(scanner.nextInt()));
+        // System.out.println(websiteClockProblem(scanner.nextInt()));
+        // не понимяю №128, у меня есть идея но она будет вычисливаться очень долго
     }
     
 
@@ -198,5 +200,52 @@ public class Java_Day_2 {
             }
         }
         return true;
+    }
+
+    private static String websiteClockProblem(int sec) {
+        int days = sec / (3600 * 24) >= 1 ? sec / (3600 * 24) : 0;
+        sec %= (3600 * 24);
+
+        int hours = sec / 3600 >= 1 ? sec / 3600 : 0;
+        sec %= 3600;
+
+        int minutes = sec / 60 >= 1 ? sec / 60 : 0;
+        sec %= 60;
+
+        int seconds = sec;
+
+        String digitalTime = "";
+        if (days >= 1) {
+            digitalTime += days < 10 ? ("0" + days + "d") : (days + "d");
+        }
+        if (hours >= 1 || days >= 1) {
+            digitalTime += hours < 10 ? ("0" + hours + "h") : (hours + "h");
+        }
+        if (minutes >= 1 || hours >= 1 || days >= 1) {
+            digitalTime += minutes < 10 ? ("0" + minutes + "m") : (minutes + "m");
+        }
+        if (seconds >= 1 || minutes >= 1 || hours >= 1 || days >= 1) {
+            digitalTime += seconds < 10 ? ("0" + seconds + "s") : (seconds + "s");
+        }
+
+        return digitalTime;
+    }
+
+
+
+    private static void problem128(int a, int b) {
+        for (; a <= b; a++) {
+            // ???
+        }
+    }
+
+    static int countDivisors(int num) {
+        int divisors = 1;
+        for (int i = 2; i <= (num / 2); i++) {
+            if (num % i == 0) {
+                divisors++;
+            }
+        }
+        return divisors;
     }
 }
