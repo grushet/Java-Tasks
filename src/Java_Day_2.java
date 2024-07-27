@@ -235,7 +235,7 @@ public class Java_Day_2 {
 
     private static void problem128(int a, int b) {
         for (; a <= b; a++) {
-            // ???
+
         }
     }
 
