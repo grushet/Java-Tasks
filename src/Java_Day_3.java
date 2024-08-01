@@ -9,14 +9,20 @@ public class Java_Day_3 {
         // System.out.println(problem120(scanner.nextInt()));
         // System.out.println(problem130());
         //                    problem143();
-        // System.out.println(problem138());
+        // System.out.println(problem138(scanner.nextInt()));
     }
 
 
-    private static char problem120(int num) {
-        char[] digits = Integer.toString(num).toCharArray();
-        Arrays.sort(digits);
-        return digits[digits.length - 1];
+    private static int problem120(int num) {
+        int greatestDigit = 0;
+        while (num > 0) {
+            if (num % 10 > greatestDigit) {
+                greatestDigit = num % 10;
+            }
+            num /= 10;
+        }
+
+        return greatestDigit;
     }
 
     private static boolean problem130() {
@@ -54,25 +60,15 @@ public class Java_Day_3 {
         System.out.print(randomNumber1 + ", " + randomNumber2 + ", " + randomNumber3);
     }
 
-    private static String problem138() {
-        int randomNumber1 = (int) (Math.random() * 15);
-        int randomNumber2 = (int) (Math.random() * 15);
-
-        while (randomNumber1 == randomNumber2) {
-            randomNumber2 = (int) (Math.random() * 15);
-        }
-
-        int randomNumber3 = (int) (Math.random() * 15);
-
-        while (randomNumber3 == randomNumber2 || randomNumber3 == randomNumber1) {
-            randomNumber3 = (int) (Math.random() * 15);
-        }
-
+    private static String problem138(int num) {
         int[] array = new int[15];
-
-        array[randomNumber1] = 1;
-        array[randomNumber2] = 1;
-        array[randomNumber3] = 1;
+        for (int i = 0; i < num; i++) {
+            int randomNumber = (int) (Math.random() * 15);
+            while (array[randomNumber] == 1) {
+                randomNumber = (int) (Math.random() * 15);
+            }
+            array[randomNumber] = 1;
+        }
 
         return Arrays.toString(array);
     }
