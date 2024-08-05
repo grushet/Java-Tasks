@@ -15,36 +15,37 @@ public class Java_Day_2 {
         //                    problem105();
         // System.out.println(problem127(scanner.nextInt()));
         // System.out.println(websiteClockProblem(scanner.nextInt()));
-        // не понимяю №128, у меня есть идея но она будет вычисливаться очень долго
+        //                    problem128(scanner.nextInt(), scanner.nextInt());
     }
     
 
-    private static String problem67(int a) {
-        int thousands = a / 1000;
-        int hundreds = a / 100 % 10;
-        int tens = a / 10 % 10;
-        int ones = a % 10;
+    private static int problem67(int num) {
 
-        int greatestDigit = Math.max(thousands, Math.max(hundreds, Math.max(tens, ones)));
-        int smallestDigit = Math.min(thousands, Math.min(hundreds, Math.min(tens, ones)));
+        char[] numArray = Integer.toString(num).toCharArray();
 
-        thousands = thousands == smallestDigit ? greatestDigit :
-                    thousands == greatestDigit ? smallestDigit :
-                                                 thousands;
+        int greatestDigit = numArray[0];
+        int placeOfGreatestDigit = 0;
 
-        hundreds = hundreds == smallestDigit ? greatestDigit :
-                   hundreds == greatestDigit ? smallestDigit :
-                                               hundreds;
+        int smallestDigit = numArray[0];
+        int placeOfSmallestDigit = 0;
 
-        tens = tens == smallestDigit ? greatestDigit :
-               tens == greatestDigit ? smallestDigit :
-                                       tens;
+        // finds the largest & smallest numbers as well as their positions in the array
+        for (int i = 0; i < numArray.length; i++) {
+            if (numArray[i] > greatestDigit) {
+                greatestDigit = numArray[i];
+                placeOfGreatestDigit = i;
+            } else if (numArray[i] < smallestDigit) {
+                smallestDigit = numArray[i];
+                placeOfSmallestDigit = i;
+            }
+        }
 
-        ones =  ones == smallestDigit ? greatestDigit :
-                ones == greatestDigit ? smallestDigit :
-                                        ones;
+        // swaps the positions of the smallest and greatest digits
+        char temp = numArray[placeOfGreatestDigit];
+        numArray[placeOfGreatestDigit] = numArray[placeOfSmallestDigit];
+        numArray[placeOfSmallestDigit] = temp;
 
-        return Integer.toString(thousands) + hundreds + tens + ones;
+        return Integer.parseInt(new String(numArray));
     }
 
     private static void problem69(double a, double b, double c) {
@@ -234,16 +235,23 @@ public class Java_Day_2 {
 
 
     private static void problem128(int a, int b) {
-        for (; a <= b; a++) {
-
+        int originalB = b;
+        int originalA = a;
+        for (; b > 0; b--) {
+            for (; a <= originalB; a++) {
+                if (addDivisors(a) == b && addDivisors(b) == a && a != b) {
+                    System.out.println("a = " + a + ", b = " + b);
+                }
+            }
+            a = originalA;
         }
     }
 
-    static int countDivisors(int num) {
+    static int addDivisors(int num) {
         int divisors = 1;
         for (int i = 2; i <= (num / 2); i++) {
             if (num % i == 0) {
-                divisors++;
+                divisors += i;
             }
         }
         return divisors;
