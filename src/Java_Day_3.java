@@ -10,6 +10,18 @@ public class Java_Day_3 {
         // System.out.println(problem130());
         //                    problem143();
         // System.out.println(problem138(scanner.nextInt()));
+        // System.out.println(arrays19(scanner.nextInt()));
+        // System.out.println(arrays32());
+        /*
+        int[] array = createCustomArray();
+        int elem = array.length;
+        arrays38(array, elem);
+        */
+        /*
+        int[] array = createCustomArray();
+        int elem = array.length;
+        System.out.println(arrays42(array, elem));
+        */
     }
 
 
@@ -71,6 +83,81 @@ public class Java_Day_3 {
         }
 
         return Arrays.toString(array);
+    }
+
+    private static boolean arrays19(int x) {
+        int[] array = {(int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100)};
+        System.out.println(Arrays.toString(array));
+
+        boolean foundNumber = false;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == x) {
+                foundNumber = true;
+                break;
+            }
+        }
+
+        return foundNumber;
+    }
+
+    private static int arrays32() {
+        int[] array = {(int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100)};
+        System.out.println(Arrays.toString(array));
+
+        int greatestDigit = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] > greatestDigit) {
+                greatestDigit = array[i];
+            }
+        }
+
+        return greatestDigit;
+    }
+
+    public static int[] createCustomArray() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Amount of elements in the array: ");
+        int elem = scanner.nextInt();
+        int[] array = new int[elem];
+
+        // creates an array based off user input
+        for (int i = 0; i < elem; i++) {
+            System.out.print("element " + (i + 1) + ": ");
+            array[i] = scanner.nextInt();
+        }
+
+        return array;
+    }
+    private static void arrays38(int[] array, int elem) {
+
+        // finds the smallest sum of two connected elements in the array
+        int minSum = Integer.MAX_VALUE;
+        int[] minSumPair = new int[2];
+        for (int i = 0; i < elem; i++) {
+            int sum = array[i] + array[i + 1];
+            if (sum < minSum) {
+                minSum = sum;
+                minSumPair[0] = array[i];
+                minSumPair[1] = array[i + 1];
+            }
+        }
+
+        System.out.println("Numbers " + Arrays.toString(minSumPair) + " give the smallest sum of " + minSum);
+    }
+
+    private static boolean arrays42(int[] array, int elem) {
+        boolean isCountingUp = false;
+        for (int i = 0; i < elem; i++) {
+            if (array[i] == i + 1) {
+                isCountingUp = true;
+            } else {
+                isCountingUp = false;
+                break;
+            }
+        }
+
+        return isCountingUp;
     }
 }
 
