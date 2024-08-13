@@ -26,6 +26,7 @@ public class Java_Day_3 {
 
 
     private static int problem120(int num) {
+        // Найдите наибольшую цифру в данном натуральном числе.
         int greatestDigit = 0;
         while (num > 0) {
             if (num % 10 > greatestDigit) {
@@ -38,6 +39,8 @@ public class Java_Day_3 {
     }
 
     private static boolean problem130() {
+        // Назовем автобусный билет несчастливым, если сумма цифр его шестизначного номера
+        // делится на 13. Могут ли два идущих подряд билета оказаться несчастливыми?
         for (int ticket1 = 100000; ticket1 < 1000000; ticket1++) {
             if (sumOfDigits(ticket1) % 13 == 0 && sumOfDigits(ticket1 + 1) % 13 == 0) {
                 return true;
@@ -56,6 +59,7 @@ public class Java_Day_3 {
     }
 
     private static void problem143() {
+        // Вывести 3 случайных числа от 0 до 100 без повторений.
         int randomNumber1 = (int) (Math.random() * 101);
         int randomNumber2 = (int) (Math.random() * 101);
 
@@ -73,6 +77,7 @@ public class Java_Day_3 {
     }
 
     private static String problem138(int num) {
+        // Сгенерировать случайную серию из 15 чисел, в которой ровно 3 единицы, остальные нули.
         int[] array = new int[15];
         for (int i = 0; i < num; i++) {
             int randomNumber = (int) (Math.random() * 15);
@@ -86,6 +91,7 @@ public class Java_Day_3 {
     }
 
     private static boolean arrays19(int x) {
+        // Определить, содержит ли массив данное число x
         int[] array = {(int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100)};
         System.out.println(Arrays.toString(array));
 
@@ -101,6 +107,7 @@ public class Java_Day_3 {
     }
 
     private static int arrays32() {
+        // Найти наибольший элемент массива.
         int[] array = {(int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100)};
         System.out.println(Arrays.toString(array));
 
@@ -130,6 +137,7 @@ public class Java_Day_3 {
         return array;
     }
     private static void arrays38(int[] array, int elem) {
+        // Дан массив. Найдите два соседних элемента, сумма которых минимальна.
 
         // finds the smallest sum of two connected elements in the array
         int minSum = Integer.MAX_VALUE;
@@ -147,6 +155,7 @@ public class Java_Day_3 {
     }
 
     private static boolean arrays42(int[] array, int elem) {
+        // Проверьте, содержит ли данный массив из n чисел, все числа от 1 до n
         boolean isCountingUp = false;
         for (int i = 0; i < elem; i++) {
             if (array[i] == i + 1) {
