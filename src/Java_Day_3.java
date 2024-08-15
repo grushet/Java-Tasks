@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Arrays;
 
@@ -8,7 +9,7 @@ public class Java_Day_3 {
 
         // System.out.println(problem120(scanner.nextInt()));
         // System.out.println(problem130());
-        //                    problem143();
+        // problem143();
         // System.out.println(problem138(scanner.nextInt()));
         // System.out.println(arrays19(scanner.nextInt()));
         // System.out.println(arrays32());
@@ -22,6 +23,7 @@ public class Java_Day_3 {
         int elem = array.length;
         System.out.println(arrays42(array, elem));
         */
+        // problem142();
     }
 
 
@@ -65,15 +67,15 @@ public class Java_Day_3 {
 
         while (randomNumber1 == randomNumber2) {
             randomNumber2 = (int) (Math.random() * 101);
+
+            int randomNumber3 = (int) (Math.random() * 101);
+
+            while (randomNumber3 == randomNumber2 || randomNumber3 == randomNumber1) {
+                randomNumber3 = (int) (Math.random() * 101);
+            }
+
+            System.out.print(randomNumber1 + ", " + randomNumber2 + ", " + randomNumber3);
         }
-
-        int randomNumber3 = (int) (Math.random() * 101);
-
-        while (randomNumber3 == randomNumber2 || randomNumber3 == randomNumber1) {
-            randomNumber3 = (int) (Math.random() * 101);
-        }
-
-        System.out.print(randomNumber1 + ", " + randomNumber2 + ", " + randomNumber3);
     }
 
     private static String problem138(int num) {
@@ -88,6 +90,32 @@ public class Java_Day_3 {
         }
 
         return Arrays.toString(array);
+    }
+
+    private static void problem142() {
+        // Компьютер загадывает число от 1 до 100. У пользователя три попытки отгадать.
+        // После каждой неудачной попытки компьютер сообщает меньше или больше загаданное число.
+        Scanner scanner = new Scanner(System.in);
+
+        final int RANDOM_NUMBER = (int) (Math.random() * 100);
+        for (int i = 0; i < 3; i++) {
+            int guess = scanner.nextInt();
+            if (guess > RANDOM_NUMBER) {
+                System.out.println("Lower");
+            } else if (guess < RANDOM_NUMBER) {
+                System.out.println("Higher");
+            } else {
+                System.out.println("Correct!");
+                break;
+            }
+        }
+        System.out.println("The number was " + RANDOM_NUMBER);
+    }
+
+    private static void problem144() {
+        // Найдите количество прямоугольных треугольников с целочисленными сторонами, меньшими 100.
+
+        // понимаю задачу, но не понимаю что делать
     }
 
     private static boolean arrays19(int x) {
@@ -111,14 +139,14 @@ public class Java_Day_3 {
         int[] array = {(int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100)};
         System.out.println(Arrays.toString(array));
 
-        int greatestDigit = 0;
+        int greatestNumber = array[0];
         for (int i = 0; i < array.length; i++) {
-            if (array[i] > greatestDigit) {
-                greatestDigit = array[i];
+            if (array[i] > greatestNumber) {
+                greatestNumber = array[i];
             }
         }
 
-        return greatestDigit;
+        return greatestNumber;
     }
 
     public static int[] createCustomArray() {
