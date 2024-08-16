@@ -7,6 +7,9 @@ public class Java_Day_4 {
         Scanner scanner = new Scanner(System.in);
 
         // System.out.println(arrays43(scanArray()));
+        // System.out.println(arrays45(scanArray()));
+        // System.out.println(arrays47(scanArray()));
+        // System.out.println(arrays55(scanArray()));
     }
 
     public static int[] scanArray() {
@@ -52,5 +55,77 @@ public class Java_Day_4 {
                                isArithmetic ? "Arithmetic" :
                                isGeometric  ? "Geometric" :
                                               "Not a progression";
+    }
+
+    private static int arrays45(int[] array) {
+        // Найдите количество различных элементов данного массива.
+
+        // finds the amount of different elements in the array
+        Arrays.sort(array);
+        int numOfDifferentElements = 1;
+        for (int i = 0; i < array.length - 1; i++) {
+            if (array[i] != array[i + 1]) {
+                numOfDifferentElements++;
+            }
+        }
+
+        return numOfDifferentElements;
+    }
+
+    private static int arrays47(int[] array) {
+        // В данном массиве найти максимальное количество одинаковых элементов.
+
+        int currentChainOfSameElements = 1;
+        int largestChainOfSameElements = 1;
+        int mostRepeatedNumber = array[0];
+
+        // finds the most recurring element in the array
+        Arrays.sort(array);
+        for (int i = 0; i < array.length - 1; i++) {
+            if (array[i] == array[i + 1]) {
+                currentChainOfSameElements++;
+            } else if (currentChainOfSameElements > largestChainOfSameElements) {
+                largestChainOfSameElements = currentChainOfSameElements;
+                mostRepeatedNumber = array[i];
+                currentChainOfSameElements = 1;
+            } else { currentChainOfSameElements = 1; }
+        }
+
+        return mostRepeatedNumber;
+    }
+
+    private static boolean arrays55(int[] array) {
+        // Определите, можно ли вычеркнуть из данного массива одно число так,
+        // чтобы оставшиеся числа оказались упорядоченными по возрастанию.
+
+        // sees is the array is compliant with the instructions given above
+        boolean isAscending = false;
+        for (int i = 0; i < array.length - 1; i++) {
+            int replacedNumber = array[i];
+            array[i] = 0;
+
+            // checks if the array is ascending, ignoring the replaced number
+            for (int j = 0; j < array.length - 1; j++) {
+                isAscending = true;
+
+                // skips replaced number
+                if (j + 1 == i || j == i) {
+                    continue;
+                }
+
+                if (array[j] >= array[j + 1]) {
+                    isAscending = false;
+                    break;
+                }
+            }
+            if (isAscending) {
+                break;
+            }
+
+            // puts replaced number back into place
+            array[i] = replacedNumber;
+        }
+
+        return isAscending;
     }
 }
