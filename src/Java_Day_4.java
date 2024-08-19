@@ -10,6 +10,7 @@ public class Java_Day_4 {
         // System.out.println(arrays45(scanArray()));
         // System.out.println(arrays47(scanArray()));
         // System.out.println(arrays55(scanArray()));
+        System.out.println(arrays69(scanArray(), scanArray()));
     }
 
     public static int[] scanArray() {
@@ -127,5 +128,44 @@ public class Java_Day_4 {
         }
 
         return isAscending;
+    }
+
+    private static int arrays69(int[] array1, int[] array2) {
+        // Даны два массива. Сформировать третий массив, состоящий из тех элементов, которые:
+        // а) присутствуют в обоих массивах; б) присутствуют только в одном из массивов.
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Input 1 for an array that contains elements that are in both arrays.");
+        System.out.println("Input 2 for an array that contains elements that are not in both arrays.");
+
+        Arrays.sort(array1);
+        Arrays.sort(array2);
+
+        int newArrayElem = 0;
+        switch (scanner.nextInt()) {
+            case 1:
+                // calculates the elements of the array
+                for (int i = 0; i < array1.length - 1; i++) {
+                    if (i != 0 && array1[i] == array1[i - 1]) {
+                        continue;
+                    }
+                    for (int j = i; j < array2.length - 1; j++) {
+                        if (j != 0 && array2[j] == array2[j - 1]) {
+                            continue;
+                        }
+                        if (array1[i] == array2[j]) {
+                            newArrayElem++;
+                        }
+                    }
+                }
+                break;
+            case 2:
+                //
+                break;
+            default:
+                System.out.println("Please enter the numbers 1 or 2.");
+        }
+
+        return newArrayElem;
     }
 }
