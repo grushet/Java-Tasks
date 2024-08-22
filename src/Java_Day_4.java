@@ -10,7 +10,7 @@ public class Java_Day_4 {
         // System.out.println(arrays45(scanArray()));
         // System.out.println(arrays47(scanArray()));
         // System.out.println(arrays55(scanArray()));
-        System.out.println(arrays69(scanArray(), scanArray()));
+        // System.out.println(arrays69(scanArray(), scanArray()));
     }
 
     public static int[] scanArray() {
@@ -130,7 +130,7 @@ public class Java_Day_4 {
         return isAscending;
     }
 
-    private static int arrays69(int[] array1, int[] array2) {
+    private static String arrays69(int[] array1, int[] array2) {
         // Даны два массива. Сформировать третий массив, состоящий из тех элементов, которые:
         // а) присутствуют в обоих массивах; б) присутствуют только в одном из массивов.
 
@@ -141,31 +141,72 @@ public class Java_Day_4 {
         Arrays.sort(array1);
         Arrays.sort(array2);
 
-        int newArrayElem = 0;
+        int newArrayIndex = 0;
+        int[] newArray = new int[array1.length + array2.length];
         switch (scanner.nextInt()) {
             case 1:
-                // calculates the elements of the array
-                for (int i = 0; i < array1.length - 1; i++) {
+                for (int i = 0; i < array1.length; i++) {
                     if (i != 0 && array1[i] == array1[i - 1]) {
                         continue;
                     }
-                    for (int j = i; j < array2.length - 1; j++) {
+                    for (int j = 0; j < array2.length; j++) {
                         if (j != 0 && array2[j] == array2[j - 1]) {
                             continue;
                         }
                         if (array1[i] == array2[j]) {
-                            newArrayElem++;
+                            newArray[newArrayIndex] = array1[i];
+                            newArrayIndex++;
                         }
                     }
                 }
                 break;
             case 2:
-                //
+                // searches for elements in array1 that are not in array2
+                for (int i = 0; i < array1.length; i++) {
+                    if (i != 0 && array1[i] == array1[i - 1]) {
+                        continue;
+                    }
+                    boolean foundInArray2 = false;
+                    for (int k : array2) {
+                        if (array1[i] == k) {
+                            foundInArray2 = true;
+                            break;
+                        }
+                    }
+                    if (!foundInArray2) {
+                        newArray[newArrayIndex] = array1[i];
+                        newArrayIndex++;
+                    }
+                }
+
+                // searches for elements in array2 that are not in array1
+                for (int i = 0; i < array1.length; i++) {
+                    if (i != 0 && array2[i] == array2[i - 1]) {
+                        continue;
+                    }
+                    boolean foundInArray1 = false;
+                    for (int k : array1) {
+                        if (array2[i] == k) {
+                            foundInArray1 = true;
+                            break;
+                        }
+                    }
+                    if (!foundInArray1) {
+                        newArray[newArrayIndex] = array2[i];
+                        newArrayIndex++;
+                    }
+                }
                 break;
             default:
                 System.out.println("Please enter the numbers 1 or 2.");
         }
 
-        return newArrayElem;
+        int[] trimmedArray = new int[newArrayIndex];
+
+        for (int i = 0; i < trimmedArray.length; i++) {
+            trimmedArray[i] = newArray[i];
+        }
+
+        return Arrays.toString(trimmedArray);
     }
 }
