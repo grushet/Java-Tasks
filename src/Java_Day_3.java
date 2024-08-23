@@ -24,6 +24,7 @@ public class Java_Day_3 {
         System.out.println(arrays42(array, elem));
         */
         // problem142();
+        // System.out.println(problem144());
     }
 
 
@@ -112,10 +113,22 @@ public class Java_Day_3 {
         System.out.println("The number was " + RANDOM_NUMBER);
     }
 
-    private static void problem144() {
+    private static int problem144() {
         // Найдите количество прямоугольных треугольников с целочисленными сторонами, меньшими 100.
 
-        // понимаю задачу, но не понимаю что делать
+        int numOfTriangles = 0;
+        for (int a = 1; a < 100; a++) {
+            for (int b = a; b < 100; b++) {
+                for (int c = 1; c < 100; c++) {
+                    if (a*a + b*b == c*c) {
+                        System.out.println(a + ", " + b + ", " + c);
+                        numOfTriangles++;
+                    }
+                }
+            }
+        }
+
+        return numOfTriangles;
     }
 
     private static boolean arrays19(int x) {
