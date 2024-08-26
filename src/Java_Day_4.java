@@ -1,3 +1,4 @@
+import javax.lang.model.util.Elements;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -11,6 +12,7 @@ public class Java_Day_4 {
         // System.out.println(arrays47(scanArray()));
         // System.out.println(arrays55(scanArray()));
         // System.out.println(arrays69(scanArray(), scanArray()));
+        // System.out.println(arrays71(scanArray(), scanArray()));
     }
 
     public static int[] scanArray() {
@@ -208,5 +210,32 @@ public class Java_Day_4 {
         }
 
         return Arrays.toString(trimmedArray);
+    }
+
+    private static boolean arrays71(int[] array1, int[] array2) {
+        // Даны два массива. Определите, существуют ли в первом массиве такие два элемента,
+        // что их сумма равна сумме каких-либо трех элементов второго массива.
+
+        // 2 for loops below sum all possible combinations of 2 elements in the first array
+        for (int i = 0; i < array1.length; i++) {
+            for (int j = i + 1; j < array1.length; j++) {
+                int sumOfTwoElements = array1[i] + array1[j];
+
+                // 3 for loops below sum all possible combinations of 3 elements in the second array
+                for (int a = 0; a < array2.length; a++) {
+                    for (int b = a + 1; b < array2.length; b++) {
+                        for (int c = b + 1; c < array2.length; c++) {
+                            int sumOfThreeElements = array2[a] + array2[b] + array2[c];
+
+                            if (sumOfTwoElements == sumOfThreeElements) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 }
