@@ -136,15 +136,15 @@ public class Java_Day_3 {
         int[] array = {(int) (Math.random() * 100), (int) (Math.random() * 100), (int) (Math.random() * 100)};
         System.out.println(Arrays.toString(array));
 
-        boolean foundNumber = false;
+        boolean foundTheNumber = false;
         for (int i = 0; i < array.length; i++) {
             if (array[i] == x) {
-                foundNumber = true;
+                foundTheNumber = true;
                 break;
             }
         }
 
-        return foundNumber;
+        return foundTheNumber;
     }
 
     private static int arrays32() {
