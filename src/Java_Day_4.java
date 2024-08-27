@@ -1,4 +1,3 @@
-import javax.lang.model.util.Elements;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -9,9 +8,10 @@ public class Java_Day_4 {
 
         // System.out.println(arrays43(scanArray()));
         // System.out.println(arrays45(scanArray()));
+        // System.out.println(arrays45NoSorting(scanArray()));
         // System.out.println(arrays47(scanArray()));
         // System.out.println(arrays55(scanArray()));
-        // System.out.println(arrays69(scanArray(), scanArray()));
+        //                    arrays69(scanArray(), scanArray());
         // System.out.println(arrays71(scanArray(), scanArray()));
     }
 
@@ -75,6 +75,23 @@ public class Java_Day_4 {
         return numOfDifferentElements;
     }
 
+    private static int arrays45NoSorting(int[] array) {
+        // Найдите количество различных элементов данного массива (без Arrays.sort()).
+
+        int numOfDifferentElements = 1;
+        outerloop:
+        for (int i = 1; i < array.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (array[i] == array[j]) {
+                    continue outerloop;
+                }
+            }
+            numOfDifferentElements++;
+        }
+
+        return numOfDifferentElements;
+    }
+
     private static int arrays47(int[] array) {
         // В данном массиве найти максимальное количество одинаковых элементов.
 
@@ -132,7 +149,7 @@ public class Java_Day_4 {
         return isAscending;
     }
 
-    private static String arrays69(int[] array1, int[] array2) {
+    private static void arrays69(int[] array1, int[] array2) {
         // Даны два массива. Сформировать третий массив, состоящий из тех элементов, которые:
         // а) присутствуют в обоих массивах; б) присутствуют только в одном из массивов.
 
@@ -143,64 +160,38 @@ public class Java_Day_4 {
         Arrays.sort(array1);
         Arrays.sort(array2);
 
-        int newArrayIndex = 0;
-        int[] newArray = new int[array1.length + array2.length];
         switch (scanner.nextInt()) {
             case 1:
-                for (int i = 0; i < array1.length; i++) {
-                    if (i != 0 && array1[i] == array1[i - 1]) {
-                        continue;
-                    }
-                    for (int j = 0; j < array2.length; j++) {
-                        if (j != 0 && array2[j] == array2[j - 1]) {
-                            continue;
-                        }
-                        if (array1[i] == array2[j]) {
-                            newArray[newArrayIndex] = array1[i];
-                            newArrayIndex++;
-                        }
-                    }
-                }
+                System.out.println(Arrays.toString(arrays69A(array1, array2)));
                 break;
-            case 2:
-                // searches for elements in array1 that are not in array2
-                for (int i = 0; i < array1.length; i++) {
-                    if (i != 0 && array1[i] == array1[i - 1]) {
-                        continue;
-                    }
-                    boolean foundInArray2 = false;
-                    for (int k : array2) {
-                        if (array1[i] == k) {
-                            foundInArray2 = true;
-                            break;
-                        }
-                    }
-                    if (!foundInArray2) {
-                        newArray[newArrayIndex] = array1[i];
-                        newArrayIndex++;
-                    }
-                }
 
-                // searches for elements in array2 that are not in array1
-                for (int i = 0; i < array1.length; i++) {
-                    if (i != 0 && array2[i] == array2[i - 1]) {
-                        continue;
-                    }
-                    boolean foundInArray1 = false;
-                    for (int k : array1) {
-                        if (array2[i] == k) {
-                            foundInArray1 = true;
-                            break;
-                        }
-                    }
-                    if (!foundInArray1) {
-                        newArray[newArrayIndex] = array2[i];
-                        newArrayIndex++;
-                    }
-                }
+            case 2:
+                System.out.println(Arrays.toString(arrays69B(array1, array2)));
                 break;
+
             default:
-                System.out.println("Please enter the numbers 1 or 2.");
+                System.out.println("Please enter the number 1 or 2");
+        }
+    }
+
+    private static int[] arrays69A(int[] array1, int[] array2) {
+
+        int newArrayIndex = 0;
+        int[] newArray = new int[array1.length + array2.length];
+
+        for (int i = 0; i < array1.length; i++) {
+            if (i != 0 && array1[i] == array1[i - 1]) {
+                continue;
+            }
+            for (int j = 0; j < array2.length; j++) {
+                if (j != 0 && array2[j] == array2[j - 1]) {
+                    continue;
+                }
+                if (array1[i] == array2[j]) {
+                    newArray[newArrayIndex] = array1[i];
+                    newArrayIndex++;
+                }
+            }
         }
 
         int[] trimmedArray = new int[newArrayIndex];
@@ -209,7 +200,57 @@ public class Java_Day_4 {
             trimmedArray[i] = newArray[i];
         }
 
-        return Arrays.toString(trimmedArray);
+        return trimmedArray;
+    }
+
+    private static int[] arrays69B(int[] array1, int[] array2) {
+
+        int newArrayIndex = 0;
+        int[] newArray = new int[array1.length + array2.length];
+
+        // searches for elements in array1 that are not in array2
+        for (int i = 0; i < array1.length; i++) {
+            if (i != 0 && array1[i] == array1[i - 1]) {
+                continue;
+            }
+            boolean foundInArray2 = false;
+            for (int k : array2) {
+                if (array1[i] == k) {
+                    foundInArray2 = true;
+                    break;
+                }
+            }
+            if (!foundInArray2) {
+                newArray[newArrayIndex] = array1[i];
+                newArrayIndex++;
+            }
+        }
+
+        // searches for elements in array2 that are not in array1
+        for (int i = 0; i < array1.length; i++) {
+            if (i != 0 && array2[i] == array2[i - 1]) {
+                continue;
+            }
+            boolean foundInArray1 = false;
+            for (int k : array1) {
+                if (array2[i] == k) {
+                    foundInArray1 = true;
+                    break;
+                }
+            }
+            if (!foundInArray1) {
+                newArray[newArrayIndex] = array2[i];
+                newArrayIndex++;
+            }
+        }
+
+        int[] trimmedArray = new int[newArrayIndex];
+
+        for (int i = 0; i < trimmedArray.length; i++) {
+            trimmedArray[i] = newArray[i];
+        }
+
+        return trimmedArray;
     }
 
     private static boolean arrays71(int[] array1, int[] array2) {
