@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Java_Day_4 {
@@ -13,6 +14,8 @@ public class Java_Day_4 {
         // System.out.println(arrays55(scanArray()));
         //                    arrays69(scanArray(), scanArray());
         // System.out.println(arrays71(scanArray(), scanArray()));
+        // System.out.println(arrays77(scanArray()));
+        // System.out.println(arrays114(scanner.nextInt(), scanner.nextInt()));
     }
 
     public static int[] scanArray() {
@@ -278,5 +281,61 @@ public class Java_Day_4 {
         }
 
         return false;
+    }
+
+    private static String arrays77(int[] array) {
+        // Дан массив из n элементов. Переставьте его элементы случайным образом.
+
+        Random random = new Random();
+
+        for (int i = 0; i < array.length; i++) {
+            int randomIndex = random.nextInt(array.length - 1);
+            int temp = array[i];
+            array[i] = array[randomIndex];
+            array[randomIndex] = temp;
+        }
+
+        return Arrays.toString(array);
+    }
+
+    private static int arrays114(int n, int m) {
+        // По кругу расположены n человек. Ведущий считает по кругу,
+        // начиная с первого, и исключает из круга каждого m-го человека.
+        // Найдите номер человека, который останется последним в круге.
+
+        boolean[] eliminated = new boolean[n];
+        int peopleRemaining = n;
+        int index = 0;
+
+        while (peopleRemaining > 1) {
+            // look for the m-th person
+            int count = m - 1; // doesn't count the first person
+            while (count > 0) {
+                index = ++index % n; // move to next person, start over if reached the end of the circle
+
+                // if person is eliminated, skip them
+                if (!eliminated[index]) {
+                    count--;
+                }
+            }
+
+            // person chosen is eliminated
+            eliminated[index] = true;
+            peopleRemaining--;
+
+            // look for next person still in the game to start counting from
+            while (eliminated[index]) {
+                index = ++index % n;
+            }
+        }
+
+        // look for the last person standing
+        for (int i = 0; i < eliminated.length; i++) {
+            if (!eliminated[i]) {
+                return i + 1;
+            }
+        }
+
+        return 0; // just here to make the method work, should never be executed
     }
 }
